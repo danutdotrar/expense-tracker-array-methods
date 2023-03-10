@@ -10,7 +10,7 @@ const dummyTransactions = [
     { id: 1, text: "Flower", amount: -20 },
     { id: 2, text: "Salary", amount: 300 },
     { id: 3, text: "Book", amount: -10 },
-    { id: 4, text: "Camer", amount: 150 },
+    { id: 4, text: "Camera", amount: 150 },
 ];
 
 let transactions = dummyTransactions;
@@ -59,6 +59,14 @@ function updateValues() {
     balance.innerHTML = `$${total}`;
     money_plus.innerHTML = `$${income}`;
     money_minus.innerHTML = `$${expense}`;
+}
+
+// Remove transaction by ID
+function removeTransaction(id) {
+    // Filter out the id
+    transactions = transactions.filter((transaction) => transaction.id !== id);
+
+    init();
 }
 
 // Init app
