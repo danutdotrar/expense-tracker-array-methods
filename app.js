@@ -27,7 +27,9 @@ function addTransactionDOM(transaction) {
 
     item.innerHTML = `
     ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span>
-    <button class="delete-btn">x</button>
+    <button class="delete-btn" onclick="removeTransaction(${
+        transaction.id
+    })">x</button>
     `;
 
     list.appendChild(item);
@@ -39,7 +41,7 @@ function updateValues() {
     const amounts = transactions.map((transaction) => transaction.amount);
 
     // Add amounts using reduce
-    const total = amounts.reduce((acc, item) => acc + item, 0).toFixed(2);
+    const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
 
     // Get income using filter
     const income = amounts
@@ -68,3 +70,37 @@ function init() {
 }
 
 init();
+
+// Add transaction
+function addTransaction(e) {
+    // Prevent default
+    e.preventDefault();
+
+    if (text.value.trim() == "" || amount.value.trim() == "") {
+        alert("Please add a text and amount");
+    } else {
+        const transaction = {
+            id: generateID(),
+            text: text.value,
+            amount: +amount.value,
+        };
+
+        transactions.push(transaction);
+
+        // Update UI
+        addTransactionDOM(transaction);
+
+        updateValues();
+    }
+
+    text.value = "";
+    amount.value = "";
+}
+
+// Generate random ID
+function generateID() {
+    return Math.floor(Math.random() * 100000);
+}
+
+// Add event listener
+form.addEventListener("submit", addTransaction);
