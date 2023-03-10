@@ -55,8 +55,8 @@ function updateValues() {
     ).toFixed(2);
 
     balance.innerHTML = `$${total}`;
-    money_plus.innerHTML = `+$${income}`;
-    money_minus.innerHTML = `-$${expense}`;
+    money_plus.innerHTML = `$${income}`;
+    money_minus.innerHTML = `$${expense}`;
 }
 
 // Init app
